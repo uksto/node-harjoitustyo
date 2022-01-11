@@ -10,10 +10,10 @@ var pool = mysql.createPool({
 });
 
 let connectionFunctions = {
-  save: (location) => {
+  save: (words) => {
     function asynFunc(resolve, reject) {
-      var sql = "insert into locations (latitude, longitude) values(?,?);";
-      var inserts = [location.latitude, location.longitude];
+      var sql = "insert into words (finnish, english) values(?,?);";
+      var inserts = [words.finnish, words.english];
       sql = mysql.format(sql, inserts);
       pool.query(sql, (err, result) => {
         if (err) {
