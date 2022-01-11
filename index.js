@@ -11,12 +11,12 @@ app.use(express.static("frontend/build"));
 
 app.use(express.json());
 
-app.get("/locations", async (req, res) => {
+app.get("/words", async (req, res) => {
   let result = await connection.findAll();
   res.send(result);
 });
 
-app.get("/locations/:id([0-9]+)", async (req, res) => {
+app.get("/words/:id([0-9]+)", async (req, res) => {
   let id = parseInt(req.params.id);
   try {
     let temp = await connection.findById(id);
@@ -33,58 +33,33 @@ app.get("/locations/:id([0-9]+)", async (req, res) => {
   }
 });
 
-app.get(
-  "/locations?sort=:foo(latitude+|latitude-|longitude+|longitude-)/i",
-  async (req, res) => {
-    console.log(req.params.foo);
-    res.end();
-    // let id = parseInt(req.params.id);
-    // try {
-    //   let temp = await connection.findById(id);
-    //   if (temp.length < 1) {
-    //     res.statusCode = 404;
-    //     res.end();
-    //   } else {
-    //     res.send(temp);
-    //   }
-    // } catch {
-    //   res.statusCode = 404;
-    //   res.end();
-    // }
-  }
-);
-
-app.post("/locations", async (req, res) => {
+app.post("/words", async (req, res) => {
   console.log(req.body);
-  var locationschema = {
-    id: "location",
+  var wordsschema = {
+    id: "words",
     type: "object",
     properties: {
-      latitude: { type: "number", required: true, minimum: -90, maximum: 90 },
-      longitude: {
-        type: "number",
-        required: true,
-        minimum: -180,
-        maximum: 180,
-      },
+      finnish: { type: "string", maxLength: 20 },
+      english: { type: "string", maxLength: 20 },
     },
+    required: ["finnish", "english"],
   };
-  if (v.validate(req.body, locationschema).valid) {
+  if (v.validate(req.body, wordsschema).valid) {
     let id = await connection.save(req.body);
     res.statusCode = 201;
-    let location = {
+    let words = {
       id: id,
-      latitude: req.body.latitude,
-      longitude: req.body.longitude,
+      finnish: req.body.finnish,
+      english: req.body.english,
     };
-    res.send(location);
+    res.send(words);
   } else {
     res.statusCode = 400;
     res.end();
   }
 });
 
-app.delete("/locations/:id([0-9]+)", async (req, res) => {
+app.delete("/words/:id([0-9]+)", async (req, res) => {
   let id = parseInt(req.params.id);
   try {
     let rows = await connection.deleteById(id);
@@ -103,27 +78,3 @@ app.delete("/locations/:id([0-9]+)", async (req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
-
-// const main = async () => {
-//   const connection = require("./database.js");
-//   try {
-//     console.log(await connection.connect());
-//     console.log(await connection.findAll());
-//     console.log(await connection.findById(1));
-//     // let location = { latitude: -80, longitude: 180 };
-//     // console.log(
-//     //   await connection.save(location).catch((err) => {
-//     //     return err;
-//     //   })
-//     // );
-//     // console.log(await connection.deleteById(15));
-//   } catch (err) {
-//     console.log(err);
-//   } finally {
-//     try {
-//       console.log(await connection.close());
-//     } catch (err) {
-//       console.log(err);
-//     }
-//   }
-// };
