@@ -49,7 +49,7 @@ let connectionFunctions = {
   },
   deleteById: (id) => {
     function asynFunc(resolve, reject) {
-      var sql = "delete from locations where id=?;";
+      var sql = "delete from words where id=?;";
       var inserts = [id];
       sql = mysql.format(sql, inserts);
       pool.query(sql, (err, result) => {
