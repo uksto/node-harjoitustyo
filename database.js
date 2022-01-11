@@ -64,7 +64,7 @@ let connectionFunctions = {
   },
   findById: (id) => {
     function asynFunc(resolve) {
-      var sql = "select * from locations where id=?;";
+      var sql = "select * from words where id=?;";
       var inserts = [id];
       sql = mysql.format(sql, inserts);
       pool.query(sql, (err, result) => {
@@ -72,8 +72,8 @@ let connectionFunctions = {
         result.map((result) => {
           resolve({
             id: result.id,
-            latitude: result.latitude,
-            longitude: result.longitude,
+            finnish: result.finnish,
+            english: result.english,
           });
         });
       });
