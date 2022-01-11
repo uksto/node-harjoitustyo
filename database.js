@@ -28,16 +28,16 @@ let connectionFunctions = {
   findAll: () => {
     function asynFunc(resolve, reject) {
       let arr = {};
-      pool.query("select * from locations;", (err, locations) => {
+      pool.query("select * from words;", (err, words) => {
         if (err) {
           reject(err);
         }
         var i = 0;
-        locations.forEach(function (locations) {
+        words.forEach(function (words) {
           arr[i] = {
-            id: `${locations.id}`,
-            latitude: `${locations.latitude}`,
-            longitude: `${locations.longitude}`,
+            id: `${words.id}`,
+            finnish: `${words.finnish}`,
+            english: `${words.english}`,
           };
           i++;
         });
