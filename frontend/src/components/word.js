@@ -1,13 +1,21 @@
 import React from "react";
 
 class Word extends React.Component {
-  state = {
-    pair: [this.props.pair],
-    check: false,
-    input: "",
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      pair: [this.props.pair],
+      input: "",
+    };
+  }
 
   render() {
+    let result;
+    if (this.props.check) {
+      result =
+        this.props.pair.finnish === this.state.input ? " correct" : " wrong";
+      console.log(this.props.pair.finnish);
+    }
     let ui = this.state.pair.map((word) => (
       <tr key={word.id}>
         <td key={word.english}>{word.english}</td>
@@ -16,7 +24,7 @@ class Word extends React.Component {
             type="text"
             onChange={(e) => this.setState({ input: e.target.value })}
           />
-          {this.state.input}
+          {result}
         </td>
       </tr>
     ));
