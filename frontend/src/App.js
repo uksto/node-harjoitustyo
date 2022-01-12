@@ -1,13 +1,17 @@
-import logo from "./logo.svg";
 import "./App.css";
 import React from "react";
+const axios = require("axios").default;
 
 class App extends React.Component {
   state = { words: [] };
   async componentDidMount() {
-    let hr = await fetch("http://localhost:8080/words");
-    let json = await hr.json();
-    this.setState({ words: json });
+    try {
+      const response = await axios.get("http://localhost:8080/words");
+      let json = Object.values(response.data);
+      this.setState({ words: json });
+    } catch (error) {
+      console.error(error);
+    }
   }
   render() {
     if (this.state.words.length === 0) {
