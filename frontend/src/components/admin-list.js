@@ -6,9 +6,10 @@ class List extends React.Component {
     super(props);
     this.state = {
       words: [],
-      tag: this.props.tag,
+      tag: this.props.tag.id,
       english: "",
       finnish: "",
+      tagname: this.props.tag.tag,
     };
   }
 
@@ -50,13 +51,25 @@ class List extends React.Component {
 
   async handleDelete(id) {
     try {
-      const response = await axios.delete("http://localhost:8080/words/" + id);
+      await axios.delete("http://localhost:8080/words/" + id);
       let tmp = [];
       let i = 0;
       this.state.words.forEach((e) => {
         if (e.id !== id) tmp[i++] = e;
       });
       this.setState({ words: tmp });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async handleEdit() {
+    try {
+      await axios.patch("http://localhost:8080/tag", {
+        id: this.state.tag,
+        tag: this.state.tagname,
+      });
+      this.props.handler(this.state.tag, this.state.tagname);
     } catch (error) {
       console.error(error);
     }
@@ -74,6 +87,12 @@ class List extends React.Component {
     ));
     return (
       <div>
+        <input
+          type="text"
+          value={this.state.tagname}
+          onChange={(e) => this.setState({ tagname: e.target.value })}
+        />
+        <button onClick={() => this.handleEdit()}>Edit</button>
         <table>
           <thead>
             <tr>

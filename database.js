@@ -138,7 +138,6 @@ let connectionFunctions = {
       var sql = "insert into tags (tag) values(?);";
       var inserts = [tag.tag];
       sql = mysql.format(sql, inserts);
-      console.log(sql);
       pool.query(sql, (err, result) => {
         if (err) {
           reject(err);
@@ -159,6 +158,21 @@ let connectionFunctions = {
           reject(err);
         }
         resolve(result.affectedRows);
+      });
+    }
+    const p = new Promise(asynFunc);
+    return p;
+  },
+  editTag: (tag) => {
+    function asynFunc(resolve, reject) {
+      var sql = "update tags set tag=? where id=?;";
+      var inserts = [tag.tag, tag.id];
+      sql = mysql.format(sql, inserts);
+      pool.query(sql, (err, result) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(result);
       });
     }
     const p = new Promise(asynFunc);

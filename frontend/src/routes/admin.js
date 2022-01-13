@@ -4,16 +4,16 @@ import React from "react";
 const axios = require("axios").default;
 
 class Admin extends React.Component {
-  state = { tags: [], select: 0, delete: 0, tagname: "" };
+  state = { tags: [], select: [], delete: 0, tagname: "" };
   async componentDidMount() {
     try {
       const response = await axios.get("http://localhost:8080/tags");
       let json = Object.values(response.data);
       this.setState({ tags: json });
-      console.log(json);
     } catch (error) {
       console.error(error);
     }
+    this.handler = this.handler.bind(this);
   }
 
   async handleNewTag() {
@@ -31,27 +31,37 @@ class Admin extends React.Component {
   }
 
   async handleTagDelete(id) {
-    console.log(id);
     try {
-      const response = await axios.delete("http://localhost:8080/tag/" + id);
+      await axios.delete("http://localhost:8080/tag/" + id);
       let tmp = [];
       let i = 0;
       this.state.tags.forEach((e) => {
         if (e.id !== id) tmp[i++] = e;
       });
       this.setState({ tags: tmp });
-      console.log(response);
     } catch (error) {
       console.error(error);
     }
   }
 
+  handler(id, tag) {
+    let tmp = this.state.tags;
+    let i = 0;
+    this.state.tags.forEach((e) => {
+      if (e.id === id) tmp[i].tag = tag;
+      i++;
+    });
+    this.setState({
+      tags: tmp,
+    });
+  }
+
   render() {
-    if (this.state.select === 0) {
+    if (this.state.select.length < 1) {
       let ui = this.state.tags.map((tag) => (
         <tr key={tag.id}>
           <td>
-            <button onClick={() => this.setState({ select: tag.id })}>
+            <button onClick={() => this.setState({ select: tag })}>
               {tag.tag}
             </button>
           </td>
@@ -87,8 +97,10 @@ class Admin extends React.Component {
     } else {
       return (
         <div>
-          <button onClick={(e) => this.setState({ select: 0 })}>Go Back</button>
-          <List tag={this.state.select}></List>
+          <button onClick={(e) => this.setState({ select: [] })}>
+            Go Back
+          </button>
+          <List tag={this.state.select} handler={this.handler}></List>
         </div>
       );
     }

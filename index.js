@@ -50,7 +50,6 @@ app.get("/words/:id([0-9]+)", async (req, res) => {
 });
 
 app.post("/words", async (req, res) => {
-  console.log("req.body " + req.body);
   req.body.tag = parseInt(req.body.tag);
   var wordsschema = {
     id: "words",
@@ -116,7 +115,6 @@ app.delete("/tag/:id([0-9]+)", async (req, res) => {
 });
 
 app.post("/tag", async (req, res) => {
-  console.log(req.body);
   var tagschema = {
     id: "tag",
     type: "object",
@@ -127,6 +125,31 @@ app.post("/tag", async (req, res) => {
   };
   if (v.validate(req.body, tagschema).valid) {
     let id = await connection.saveTag(req.body);
+    res.statusCode = 201;
+    let tag = {
+      id: id,
+      tag: req.body.tag,
+    };
+    res.send(tag);
+  } else {
+    res.statusCode = 400;
+    res.end();
+  }
+});
+
+app.patch("/tag", async (req, res) => {
+  req.body.id = parseInt(req.body.id);
+  var tagschema = {
+    id: "tag",
+    type: "object",
+    properties: {
+      id: { type: "integer", minimum: 1 },
+      tag: { type: "string", maxLength: 20 },
+    },
+    required: ["id", "tag"],
+  };
+  if (v.validate(req.body, tagschema).valid) {
+    let id = await connection.editTag(req.body);
     res.statusCode = 201;
     let tag = {
       id: id,
