@@ -4,7 +4,8 @@
   "description": "This is my exercise work project for school course. This readme is really barren but it will be updated as I decide what kind of project I'm going to do.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
