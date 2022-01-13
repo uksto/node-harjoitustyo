@@ -40,6 +40,8 @@ class List extends React.Component {
           tag: response.data.tag,
         };
         this.setState({ words: tmp });
+        this.setState({ english: "" });
+        this.setState({ finnish: "" });
       } catch (error) {
         console.error(error);
       }
@@ -47,7 +49,6 @@ class List extends React.Component {
   }
 
   async handleDelete(id) {
-    console.log(id);
     try {
       const response = await axios.delete("http://localhost:8080/words/" + id);
       let tmp = [];
@@ -56,7 +57,6 @@ class List extends React.Component {
         if (e.id !== id) tmp[i++] = e;
       });
       this.setState({ words: tmp });
-      console.log(response);
     } catch (error) {
       console.error(error);
     }
@@ -87,12 +87,14 @@ class List extends React.Component {
               <td>
                 <input
                   type="text"
+                  value={this.state.english}
                   onChange={(e) => this.setState({ english: e.target.value })}
                 />
               </td>
               <td>
                 <input
                   type="text"
+                  value={this.state.finnish}
                   onChange={(e) => this.setState({ finnish: e.target.value })}
                 />
               </td>

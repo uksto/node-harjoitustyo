@@ -24,6 +24,7 @@ class Admin extends React.Component {
       let tmp = this.state.tags;
       tmp[tmp.length] = response.data;
       this.setState({ tags: tmp });
+      this.setState({ tagname: "" });
     } catch (error) {
       console.error(error);
     }
@@ -69,6 +70,7 @@ class Admin extends React.Component {
                 <td>
                   <input
                     type="text"
+                    value={this.state.tagname}
                     onChange={(e) => this.setState({ tagname: e.target.value })}
                   />
                 </td>
