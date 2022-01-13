@@ -7,7 +7,7 @@ class Admin extends React.Component {
   state = { tags: [], select: [], delete: 0, tagname: "" };
   async componentDidMount() {
     try {
-      const response = await axios.get("http://localhost:8080/tags");
+      const response = await axios.get("/tags");
       let json = Object.values(response.data);
       this.setState({ tags: json });
     } catch (error) {
@@ -18,7 +18,7 @@ class Admin extends React.Component {
 
   async handleNewTag() {
     try {
-      const response = await axios.post("http://localhost:8080/tag", {
+      const response = await axios.post("/tag", {
         tag: this.state.tagname,
       });
       let tmp = this.state.tags;
@@ -32,7 +32,7 @@ class Admin extends React.Component {
 
   async handleTagDelete(id) {
     try {
-      await axios.delete("http://localhost:8080/tag/" + id);
+      await axios.delete("/tag/" + id);
       let tmp = [];
       let i = 0;
       this.state.tags.forEach((e) => {

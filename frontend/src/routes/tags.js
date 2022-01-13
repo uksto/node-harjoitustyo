@@ -7,7 +7,7 @@ class Tags extends React.Component {
   state = { tags: [], select: 0, swap: false };
   async componentDidMount() {
     try {
-      const response = await axios.get("http://localhost:8080/tags");
+      const response = await axios.get("/tags");
       let json = Object.values(response.data);
       this.setState({ tags: json });
     } catch (error) {

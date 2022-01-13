@@ -6,7 +6,7 @@ class App extends React.Component {
   state = { words: [] };
   async componentDidMount() {
     try {
-      const response = await axios.get("http://localhost:8080/tags");
+      const response = await axios.get("/tags");
       let json = Object.values(response.data);
       this.setState({ words: json });
     } catch (error) {

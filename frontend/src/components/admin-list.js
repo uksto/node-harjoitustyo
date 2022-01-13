@@ -15,9 +15,7 @@ class List extends React.Component {
 
   async componentDidMount() {
     try {
-      const response = await axios.get(
-        "http://localhost:8080/words/tag/" + this.state.tag
-      );
+      const response = await axios.get("/words/tag/" + this.state.tag);
       let json = Object.values(response.data);
       this.setState({ words: json });
     } catch (error) {
@@ -28,7 +26,7 @@ class List extends React.Component {
   async handlePost() {
     if (this.state.english !== "" && this.state.finnish !== "") {
       try {
-        const response = await axios.post("http://localhost:8080/words", {
+        const response = await axios.post("/words", {
           english: this.state.english,
           finnish: this.state.finnish,
           tag: this.state.tag,
@@ -51,7 +49,7 @@ class List extends React.Component {
 
   async handleDelete(id) {
     try {
-      await axios.delete("http://localhost:8080/words/" + id);
+      await axios.delete("/words/" + id);
       let tmp = [];
       let i = 0;
       this.state.words.forEach((e) => {
@@ -65,7 +63,7 @@ class List extends React.Component {
 
   async handleEdit() {
     try {
-      await axios.patch("http://localhost:8080/tag", {
+      await axios.patch("/tag", {
         id: this.state.tag,
         tag: this.state.tagname,
       });
