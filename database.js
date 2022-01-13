@@ -136,8 +136,9 @@ let connectionFunctions = {
   saveTag: (tag) => {
     function asynFunc(resolve, reject) {
       var sql = "insert into tags (tag) values(?);";
-      var inserts = [tag];
+      var inserts = [tag.tag];
       sql = mysql.format(sql, inserts);
+      console.log(sql);
       pool.query(sql, (err, result) => {
         if (err) {
           reject(err);

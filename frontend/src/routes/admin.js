@@ -4,7 +4,7 @@ import React from "react";
 const axios = require("axios").default;
 
 class Admin extends React.Component {
-  state = { tags: [], select: 0, delete: 0 };
+  state = { tags: [], select: 0, delete: 0, tagname: "" };
   async componentDidMount() {
     try {
       const response = await axios.get("http://localhost:8080/tags");
@@ -17,10 +17,25 @@ class Admin extends React.Component {
 
   componentDidUpdate() {
     if (this.state.delete > 0) {
+      console.log("yeet");
     }
   }
 
-  handleNewTag() {}
+  async handleNewTag() {
+    console.log(this.state.tagname);
+    try {
+      const response = await axios.post("http://localhost:8080/tag", {
+        tag: this.state.tagname,
+      });
+      let tmp = this.state.tags;
+      tmp[tmp.length] = {
+        tag: response.data.tag,
+      };
+      this.setState({ tags: tmp });
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   render() {
     if (this.state.select === 0) {
@@ -48,11 +63,13 @@ class Admin extends React.Component {
                 <td>
                   <input
                     type="text"
-                    onChange={(e) => this.setState({ english: e.target.value })}
+                    onChange={(e) => this.setState({ tagname: e.target.value })}
                   />
                 </td>
                 <td>
-                  <button onClick={() => this.handleNewTag}>Add new Tag</button>
+                  <button onClick={() => this.handleNewTag()}>
+                    Add new Tag
+                  </button>
                 </td>
               </tr>
             </tbody>

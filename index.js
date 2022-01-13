@@ -126,7 +126,7 @@ app.post("/tag", async (req, res) => {
     required: ["tag"],
   };
   if (v.validate(req.body, tagschema).valid) {
-    let id = await connection.save(req.body);
+    let id = await connection.saveTag(req.body);
     res.statusCode = 201;
     let tag = {
       id: id,
