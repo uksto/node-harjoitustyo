@@ -50,15 +50,17 @@ app.get("/words/:id([0-9]+)", async (req, res) => {
 });
 
 app.post("/words", async (req, res) => {
-  console.log(req.body);
+  console.log("req.body " + req.body);
+  req.body.tag = parseInt(req.body.tag);
   var wordsschema = {
     id: "words",
     type: "object",
     properties: {
       finnish: { type: "string", maxLength: 20 },
       english: { type: "string", maxLength: 20 },
+      tag: { type: "integer", minimum: 1 },
     },
-    required: ["finnish", "english"],
+    required: ["finnish", "english", "tag"],
   };
   if (v.validate(req.body, wordsschema).valid) {
     let id = await connection.save(req.body);
@@ -67,6 +69,7 @@ app.post("/words", async (req, res) => {
       id: id,
       finnish: req.body.finnish,
       english: req.body.english,
+      tag: req.body.tag,
     };
     res.send(words);
   } else {

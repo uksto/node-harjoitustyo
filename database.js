@@ -12,8 +12,8 @@ var pool = mysql.createPool({
 let connectionFunctions = {
   save: (words) => {
     function asynFunc(resolve, reject) {
-      var sql = "insert into words (finnish, english) values(?,?);";
-      var inserts = [words.finnish, words.english];
+      var sql = "insert into words (finnish, english, tag) values(?,?,?);";
+      var inserts = [words.finnish, words.english, words.tag];
       sql = mysql.format(sql, inserts);
       pool.query(sql, (err, result) => {
         if (err) {
