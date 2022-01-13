@@ -12,10 +12,12 @@ class Word extends React.Component {
 
   componentDidUpdate() {
     if (this.props.check && this.state.output === "") {
-      console.log("yeet");
-      this.props.pair.finnish === this.state.input
-        ? this.setState({ output: "correct" })
-        : this.setState({ output: "wrong" });
+      if (this.props.pair.finnish === this.state.input) {
+        this.setState({ output: "correct" });
+        this.props.handler(this.props.count);
+      } else {
+        this.setState({ output: "wrong" });
+      }
     }
   }
 
@@ -28,8 +30,8 @@ class Word extends React.Component {
             type="text"
             onChange={(e) => this.setState({ input: e.target.value })}
           />
-          {this.state.output}
         </td>
+        <td>{this.state.output}</td>
       </tr>
     ));
     return <tbody>{ui}</tbody>;
