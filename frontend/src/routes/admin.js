@@ -4,7 +4,7 @@ import React from "react";
 const axios = require("axios").default;
 
 class Admin extends React.Component {
-  state = { words: [], tags: [] };
+  state = { tags: [], select: 0, delete: 0 };
   async componentDidMount() {
     try {
       const response = await axios.get("http://localhost:8080/tags");
@@ -14,22 +14,37 @@ class Admin extends React.Component {
       console.error(error);
     }
   }
+
+  componentDidUpdate() {
+    if (this.state.delete > 0) {
+    }
+  }
+
   render() {
     if (this.state.tags.length === 0) {
       return <p>loading...</p>;
     } else {
       if (this.state.select === 0) {
         let ui = this.state.tags.map((tag) => (
-          <div key={tag.id}>
-            <button onClick={() => this.setState({ select: tag.id })}>
-              {tag.tag}
-            </button>
-          </div>
+          <tr key={tag.id}>
+            <td>
+              <button onClick={() => this.setState({ select: tag.id })}>
+                {tag.tag}
+              </button>
+            </td>
+            <td>
+              <button onClick={() => this.setState({ delete: tag.id })}>
+                Delete
+              </button>
+            </td>
+          </tr>
         ));
         return (
           <div>
             <h2>Select what words you want to learn</h2>
-            <ul>{ui}</ul>
+            <table>
+              <tbody>{ui}</tbody>
+            </table>
           </div>
         );
       } else {
