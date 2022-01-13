@@ -112,6 +112,27 @@ let connectionFunctions = {
     const p = new Promise(asynFunc);
     return p;
   },
+  findTags: () => {
+    function asynFunc(resolve, reject) {
+      let arr = {};
+      pool.query("select * from tags;", (err, words) => {
+        if (err) {
+          reject(err);
+        }
+        var i = 0;
+        words.forEach(function (tags) {
+          arr[i] = {
+            id: `${tags.id}`,
+            tag: `${tags.tag}`,
+          };
+          i++;
+        });
+        resolve(arr);
+      });
+    }
+    const p = new Promise(asynFunc);
+    return p;
+  },
 };
 
 module.exports = connectionFunctions;
