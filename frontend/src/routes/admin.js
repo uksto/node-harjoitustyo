@@ -10,28 +10,36 @@ class Admin extends React.Component {
       const response = await axios.get("http://localhost:8080/tags");
       let json = Object.values(response.data);
       this.setState({ tags: json });
+      console.log(json);
     } catch (error) {
       console.error(error);
     }
   }
 
-  componentDidUpdate() {
-    if (this.state.delete > 0) {
-      console.log("yeet");
-    }
-  }
-
   async handleNewTag() {
-    console.log(this.state.tagname);
     try {
       const response = await axios.post("http://localhost:8080/tag", {
         tag: this.state.tagname,
       });
       let tmp = this.state.tags;
-      tmp[tmp.length] = {
-        tag: response.data.tag,
-      };
+      tmp[tmp.length] = response.data;
       this.setState({ tags: tmp });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async handleTagDelete(id) {
+    console.log(id);
+    try {
+      const response = await axios.delete("http://localhost:8080/tag/" + id);
+      let tmp = [];
+      let i = 0;
+      this.state.tags.forEach((e) => {
+        if (e.id !== id) tmp[i++] = e;
+      });
+      this.setState({ tags: tmp });
+      console.log(response);
     } catch (error) {
       console.error(error);
     }
@@ -47,9 +55,7 @@ class Admin extends React.Component {
             </button>
           </td>
           <td>
-            <button onClick={() => this.setState({ delete: tag.id })}>
-              Delete
-            </button>
+            <button onClick={() => this.handleTagDelete(tag.id)}>Delete</button>
           </td>
         </tr>
       ));
