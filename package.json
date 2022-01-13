@@ -4,9 +4,7 @@
   "description": "This is my exercise work project for school course. This readme is really barren but it will be updated as I decide what kind of project I'm going to do.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "heroku-postbuild": "cd frontend && npm install && npm run build",
-    "start": "node index.js && cd frontend && npm run build"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
