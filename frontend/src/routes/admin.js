@@ -1,21 +1,49 @@
-function Admin() {
-  return (
-    <main>
-      <h2>About</h2>
-      <p>
-        This is supposed to be an about site where I put my contact information.
-        This time I wont put my contact information here because this is only a
-        school exercise. I do realise that school exercises are important and
-        I'm not trying to downplay them by saying "only a school exercise". That
-        just means that this site is not meant to be viewed by anyone else than
-        my teacher and in that case this site does not need my contact
-        information. Thanks for attending my ted talk.
-      </p>
-      <p>Name: Staff Sergeant Griggs</p>
-      <p>Phone: 678452056</p>
-      <p>email: Griggs@duty4.com</p>
-    </main>
-  );
+import "../App.css";
+import List from "../components/admin-list";
+import React from "react";
+const axios = require("axios").default;
+
+class Admin extends React.Component {
+  state = { words: [], tags: [] };
+  async componentDidMount() {
+    try {
+      const response = await axios.get("http://localhost:8080/tags");
+      let json = Object.values(response.data);
+      this.setState({ tags: json });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  render() {
+    if (this.state.tags.length === 0) {
+      return <p>loading...</p>;
+    } else {
+      if (this.state.select === 0) {
+        let ui = this.state.tags.map((tag) => (
+          <div key={tag.id}>
+            <button onClick={() => this.setState({ select: tag.id })}>
+              {tag.tag}
+            </button>
+          </div>
+        ));
+        return (
+          <div>
+            <h2>Select what words you want to learn</h2>
+            <ul>{ui}</ul>
+          </div>
+        );
+      } else {
+        return (
+          <div>
+            <button onClick={(e) => this.setState({ select: 0 })}>
+              Go Back
+            </button>
+            <List tag={this.state.select}></List>
+          </div>
+        );
+      }
+    }
+  }
 }
 
 export default Admin;
