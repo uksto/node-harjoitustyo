@@ -16,7 +16,7 @@ app.get("/words", async (req, res) => {
   res.send(result);
 });
 
-app.get("/words/:tag([0-9]+)", async (req, res) => {
+app.get("/words/tag/:tag([0-9]+)", async (req, res) => {
   let id = parseInt(req.params.tag);
   try {
     let temp = await connection.findByTag(id);
@@ -24,8 +24,7 @@ app.get("/words/:tag([0-9]+)", async (req, res) => {
       res.statusCode = 404;
       res.end();
     } else {
-      var tmp = JSON.parse(temp);
-      res.send(tmp);
+      res.send(temp);
     }
   } catch {
     res.statusCode = 404;

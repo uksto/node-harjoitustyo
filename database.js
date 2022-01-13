@@ -82,19 +82,25 @@ let connectionFunctions = {
     return p;
   },
   findByTag: (id) => {
-    function asynFunc(resolve) {
+    function asynFunc(resolve, reject) {
       var sql = "select * from words where tag=?;";
       var inserts = [id];
       sql = mysql.format(sql, inserts);
       pool.query(sql, (err, result) => {
-        resolve(result);
+        if (err) {
+          reject(err);
+        }
+        let out = [];
+        let i = 0;
         result.map((result) => {
-          resolve({
+          out[i] = {
             id: result.id,
             finnish: result.finnish,
             english: result.english,
-          });
+          };
+          i++;
         });
+        resolve(out);
       });
     }
     const p = new Promise(asynFunc);
