@@ -6,7 +6,7 @@ class App extends React.Component {
   state = { words: [] };
   async componentDidMount() {
     try {
-      const response = await axios.get("http://localhost:8080/words");
+      const response = await axios.get("http://localhost:8080/tags");
       let json = Object.values(response.data);
       this.setState({ words: json });
     } catch (error) {
@@ -19,7 +19,7 @@ class App extends React.Component {
     } else {
       let ui = this.state.words.map((word) => (
         <li key={word.id}>
-          {word.id} - {word.finnish} - {word.english}
+          {word.id} - {word.tag}
         </li>
       ));
       return <ul>{ui}</ul>;

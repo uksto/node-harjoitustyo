@@ -14,7 +14,7 @@ function App() {
         <Link to="/">
           <span>Frontpage</span>
         </Link>
-        <Link to="/list">
+        <Link to="/tags">
           <span>Word lists</span>
         </Link>
         <Link to="/admin">

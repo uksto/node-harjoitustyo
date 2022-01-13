@@ -8,7 +8,7 @@ class List extends React.Component {
     this.state = {
       words: [],
       check: false,
-      tag: 1,
+      tag: this.props.tag,
       points: [],
     };
 
@@ -42,11 +42,11 @@ class List extends React.Component {
   };
 
   render() {
-    console.log(this.state.points);
     let pointsCount = 0;
     this.state.points.forEach((point) => {
-      if (point == 1) pointsCount++;
+      if (point === 1) pointsCount++;
     });
+    pointsCount = pointsCount + "/" + this.state.words.length;
 
     if (this.state.words.length === 0) {
       return <p>loading...</p>;
@@ -72,8 +72,8 @@ class List extends React.Component {
             </thead>
             {ui}
           </table>
+          <p>Score: {pointsCount}</p>
           <button onClick={this.handleClick}>Check answers</button>
-          {pointsCount}
         </div>
       );
     }

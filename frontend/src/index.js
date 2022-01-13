@@ -6,7 +6,7 @@ import { render } from "react-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import App from "./App";
-import List from "./routes/list";
+import Tags from "./routes/tags";
 import Admin from "./routes/admin";
 import Front from "./routes/front";
 const rootElement = document.getElementById("root");
@@ -15,7 +15,7 @@ render(
     <Routes>
       <Route path="/" element={<App />}>
         <Route index element={<Front />} />
-        <Route path="list" element={<List />} />
+        <Route path="tags" element={<Tags />} />
         <Route path="admin" element={<Admin />} />
       </Route>
       <Route
