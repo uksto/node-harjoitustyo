@@ -8,11 +8,14 @@ class List extends React.Component {
     this.state = {
       words: [],
       check: false,
+      tag: 1,
     };
   }
   async componentDidMount() {
     try {
-      const response = await axios.get("http://localhost:8080/words");
+      const response = await axios.get(
+        "http://localhost:8080/words/tag/" + this.state.tag
+      );
       let json = Object.values(response.data);
       this.setState({ words: json });
     } catch (error) {
