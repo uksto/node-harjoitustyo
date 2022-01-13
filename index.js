@@ -96,6 +96,46 @@ app.get("/tags", async (req, res) => {
   res.send(result);
 });
 
+app.delete("/tag/:id([0-9]+)", async (req, res) => {
+  let id = parseInt(req.params.id);
+  try {
+    let rows = await connection.deleteTag(id);
+    if (rows == 0) {
+      res.statusCode = 404;
+    } else {
+      res.statusCode = 204;
+    }
+  } catch {
+    res.statusCode = 404;
+  } finally {
+    res.end();
+  }
+});
+
+app.post("/tag", async (req, res) => {
+  console.log(req.body);
+  var tagschema = {
+    id: "tag",
+    type: "object",
+    properties: {
+      tag: { type: "string", maxLength: 20 },
+    },
+    required: ["tag"],
+  };
+  if (v.validate(req.body, tagschema).valid) {
+    let id = await connection.save(req.body);
+    res.statusCode = 201;
+    let tag = {
+      id: id,
+      tag: req.body.tag,
+    };
+    res.send(tag);
+  } else {
+    res.statusCode = 400;
+    res.end();
+  }
+});
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });

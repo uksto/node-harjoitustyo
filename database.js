@@ -133,6 +133,36 @@ let connectionFunctions = {
     const p = new Promise(asynFunc);
     return p;
   },
+  saveTag: (tag) => {
+    function asynFunc(resolve, reject) {
+      var sql = "insert into tags (tag) values(?);";
+      var inserts = [tag];
+      sql = mysql.format(sql, inserts);
+      pool.query(sql, (err, result) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(result.insertId);
+      });
+    }
+    const p = new Promise(asynFunc);
+    return p;
+  },
+  deleteTag: (id) => {
+    function asynFunc(resolve, reject) {
+      var sql = "delete from tags where id=?;";
+      var inserts = [id];
+      sql = mysql.format(sql, inserts);
+      pool.query(sql, (err, result) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(result.affectedRows);
+      });
+    }
+    const p = new Promise(asynFunc);
+    return p;
+  },
 };
 
 module.exports = connectionFunctions;
