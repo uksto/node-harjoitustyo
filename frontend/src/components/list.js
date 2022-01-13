@@ -48,6 +48,25 @@ class List extends React.Component {
     });
     pointsCount = pointsCount + "/" + this.state.words.length;
 
+    let header = (
+      <thead>
+        <tr>
+          <th>English</th>
+          <th>Finnish</th>
+        </tr>
+      </thead>
+    );
+    if (this.props.swap) {
+      header = (
+        <thead>
+          <tr>
+            <th>Finnish</th>
+            <th>English</th>
+          </tr>
+        </thead>
+      );
+    }
+
     if (this.state.words.length === 0) {
       return <p>loading...</p>;
     } else {
@@ -59,17 +78,13 @@ class List extends React.Component {
           pair={word}
           check={this.state.check}
           handler={this.handler}
+          swap={this.props.swap}
         />
       ));
       return (
         <div>
           <table>
-            <thead>
-              <tr>
-                <th>English</th>
-                <th>Finnish</th>
-              </tr>
-            </thead>
+            {header}
             {ui}
           </table>
           <p>Score: {pointsCount}</p>

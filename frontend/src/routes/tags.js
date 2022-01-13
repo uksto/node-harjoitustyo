@@ -4,7 +4,7 @@ import React from "react";
 const axios = require("axios").default;
 
 class Tags extends React.Component {
-  state = { tags: [], select: 0 };
+  state = { tags: [], select: 0, swap: false };
   async componentDidMount() {
     try {
       const response = await axios.get("http://localhost:8080/tags");
@@ -21,16 +21,30 @@ class Tags extends React.Component {
     } else {
       if (this.state.select === 0) {
         let ui = this.state.tags.map((tag) => (
-          <div key={tag.id}>
-            <button onClick={() => this.setState({ select: tag.id })}>
-              {tag.tag}
-            </button>
-          </div>
+          <tr key={tag.id}>
+            <td>{tag.tag}</td>
+            <td>
+              <button
+                onClick={() => this.setState({ select: tag.id, swap: false })}
+              >
+                Practice Finnish
+              </button>
+            </td>
+            <td>
+              <button
+                onClick={() => this.setState({ select: tag.id, swap: true })}
+              >
+                Practice English
+              </button>
+            </td>
+          </tr>
         ));
         return (
           <div>
             <h2>Select what words you want to learn</h2>
-            <ul>{ui}</ul>
+            <table>
+              <tbody>{ui}</tbody>
+            </table>
           </div>
         );
       } else {
@@ -39,7 +53,7 @@ class Tags extends React.Component {
             <button onClick={(e) => this.setState({ select: 0 })}>
               Go Back
             </button>
-            <List tag={this.state.select}></List>
+            <List tag={this.state.select} swap={this.state.swap}></List>
           </div>
         );
       }
