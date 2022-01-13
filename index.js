@@ -91,6 +91,11 @@ app.delete("/words/:id([0-9]+)", async (req, res) => {
   }
 });
 
+app.get("/tags", async (req, res) => {
+  let result = await connection.findTags();
+  res.send(result);
+});
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
