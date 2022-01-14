@@ -1,8 +1,7 @@
 var express = require("express");
 var app = express();
-const port = 5000;
-const connection = require("./database.js");
 const path = require("path");
+const connection = require("./database.js");
 var Validator = require("jsonschema").Validator;
 var v = new Validator();
 var cors = require("cors");
@@ -11,10 +10,6 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, "frontend/build")));
 
 app.use(express.json());
-
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname + "/frontend/build/index.html"));
-});
 
 app.get("/words", async (req, res) => {
   let result = await connection.findAll();
@@ -167,6 +162,7 @@ app.patch("/tag", async (req, res) => {
   }
 });
 
+const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
