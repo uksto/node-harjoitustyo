@@ -61,9 +61,10 @@ https://youtu.be/bPo3d6gK_Jc
 
 ## Built with
 
-Node.js
-Express
-React
-Heroku
+Node.js<br />
+Express<br />
+React<br />
+Heroku<br />
+MySQL<br />
 
 ---
