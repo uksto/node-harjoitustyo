@@ -97,9 +97,8 @@ class Admin extends React.Component {
     } else {
       return (
         <div>
-          <button onClick={(e) => this.setState({ select: [] })}>
-            Go Back
-          </button>
+          <h2>Edit Tag names or list of words</h2>
+          <button onClick={() => this.setState({ select: [] })}>Go Back</button>
           <List tag={this.state.select} handler={this.handler}></List>
         </div>
       );

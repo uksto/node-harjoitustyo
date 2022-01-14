@@ -50,6 +50,7 @@ class Tags extends React.Component {
       } else {
         return (
           <div>
+            <h2>Translate given words and press Check answers</h2>
             <button onClick={(e) => this.setState({ select: 0 })}>
               Go Back
             </button>

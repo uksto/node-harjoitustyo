@@ -9,13 +9,13 @@ function App() {
         backgroundColor: "lightgray",
       }}
     >
-      <h1>Cool Cars Site</h1>
+      <h1>Learn English!</h1>
       <nav>
         <Link to="/">
           <span>Frontpage</span>
         </Link>
         <Link to="/tags">
-          <span>Word lists</span>
+          <span>Learn Words</span>
         </Link>
         <Link to="/admin">
           <span>Admin</span>
@@ -23,7 +23,7 @@ function App() {
       </nav>
       <Outlet />
       <p style={{ background: "gray", textAlign: "center" }}>
-        Author: Staff Sergeant Griggs
+        Author: Otto Kujala
       </p>
     </main>
   );
