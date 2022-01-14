@@ -1,14 +1,35 @@
 # Node Harjoitustyö
 
-This is my exercise work project for school course.
-This project is "Learn English!" app.
-App is currently running in Heroku https://node-harjoitus.herokuapp.com/.
+This is my exercise work project for school course.<br />
+This project is "Learn English!" app.<br />
+App is currently running in Heroku https://node-harjoitus.herokuapp.com/.<br />
 
 ## Features
 
-User is able to learn different words that are divided to tags.
-
+User is able to learn different words that are divided to tags.<br />
+<br />
 Admin is able to edit word lists and tags easily.
+
+---
+
+## Usage
+
+**User**<br />
+<br />
+Select a tag in Learn Words tab and click what language you want to learn.<br />
+<br />
+Write words with capital letter and press check answers.<br />
+<br />
+App will show what words were right and calculates a score.<br />
+<br />
+Press Go Back to try other words.<br />
+<br />
+**Admin**<br />
+Add or remove tags in Admin tab.<br />
+<br />
+Click a tag to edit it.<br />
+<br />
+Now you can add or remove selected tags words and edit tag name.<br />
 
 ---
 
@@ -32,10 +53,6 @@ Tag and word edit
 ---
 
 ## Screencast
-
----
-
-## Usage
 
 ---
 
