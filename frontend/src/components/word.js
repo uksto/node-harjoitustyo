@@ -33,8 +33,12 @@ class Word extends React.Component {
   componentDidUpdate() {
     if (this.props.check && this.state.output === "") {
       if (
-        (this.props.pair.finnish === this.state.input && !this.props.swap) ||
-        (this.props.pair.english === this.state.input && this.props.swap)
+        (this.props.pair.finnish.toLowerCase() ===
+          this.state.input.toLowerCase() &&
+          !this.props.swap) ||
+        (this.props.pair.english.toLowerCase() ===
+          this.state.input.toLowerCase() &&
+          this.props.swap)
       ) {
         this.setState({ output: "correct" });
         this.props.handler(this.props.count);
