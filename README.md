@@ -25,6 +25,7 @@ App will show what words were right and calculates a score.<br />
 Press Go Back to try other words.<br />
 <br />
 **Admin**<br />
+<br />
 Add or remove tags in Admin tab.<br />
 <br />
 Click a tag to edit it.<br />
