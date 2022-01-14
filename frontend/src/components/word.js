@@ -4,6 +4,20 @@ import React from "react";
  * Conponent that handles word pairs and checks
  */
 class Word extends React.Component {
+  /**
+   * constructor
+   *
+   * props
+   * @param {array} props props that are given in List component
+   * @param {boolean} props.swap boolean if you want to guess words the other way around
+   * @param {array} props.pair word pair array
+   * @param {boolean} props.check boolean to initiate word check
+   *
+   * state
+   * @param {array} pair word pair array
+   * @param {string} input the word that user guessed
+   * @param {string} output string that tells if user was right or wrong
+   */
   constructor(props) {
     super(props);
     this.state = {

@@ -7,6 +7,12 @@ const axios = require("axios").default;
  * Site that Shows user a list of tags to choose from
  */
 class Tags extends React.Component {
+  /**
+   * state
+   * @param {array} tags array that contains all tags
+   * @param {int} select id of selected tag
+   * @param {boolean} swap boolean if you want to guess words the other way around
+   */
   state = { tags: [], select: 0, swap: false };
 
   /**

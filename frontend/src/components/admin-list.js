@@ -5,6 +5,21 @@ const axios = require("axios").default;
  * Conponent that handles editing selected tag and words
  */
 class AdminList extends React.Component {
+  /**
+   * constructor
+   *
+   * props
+   * @param {array} props props that are given in Admin component
+   * @param {array} props.tag array that is selected tag
+   * @param {function} props.handler function that handles tag name chane in Admin component
+   *
+   * state
+   * @param {array} words words in selected tag
+   * @param {int} tag id of selected tag
+   * @param {string} tagname name of selected tag
+   * @param {string} english English word that is added
+   * @param {string} finnish Finnish word that is added
+   */
   constructor(props) {
     super(props);
     this.state = {

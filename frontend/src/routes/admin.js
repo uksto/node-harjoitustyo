@@ -7,6 +7,13 @@ const axios = require("axios").default;
  * Site that Shows admin a list of tags to edit
  */
 class Admin extends React.Component {
+  /**
+   * state
+   * @param {array} tags array that contains all tags
+   * @param {array} select selected tag object
+   * @param {int} delete id of a tag to be deleted
+   * @param {string} tagname name of a tag that is created
+   */
   state = { tags: [], select: [], delete: 0, tagname: "" };
 
   /**

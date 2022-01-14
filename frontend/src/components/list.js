@@ -6,6 +6,19 @@ const axios = require("axios").default;
  * Component that Shows user a list of words and inputs
  */
 class List extends React.Component {
+  /**
+   * constructor
+   *
+   * props
+   * @param {array} props props that are given in Tags component
+   * @param {boolean} props.swap boolean if you want to guess words the other way around
+   *
+   * state
+   * @param {array} words array that contains all tag
+   * @param {boolean} check boolean to initiate word check
+   * @param {int} tag id of selected tag
+   * @param {array} points array with all collected points
+   */
   constructor(props) {
     super(props);
     this.state = {
