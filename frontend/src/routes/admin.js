@@ -98,7 +98,7 @@ class Admin extends React.Component {
        */
       return (
         <div>
-          <h2>Select what words you want to learn</h2>
+          <h2>Select what tag you want to edit</h2>
           <table>
             <tbody>
               {ui}
@@ -126,7 +126,7 @@ class Admin extends React.Component {
        */
       return (
         <div>
-          <h2>Edit Tag names or list of words</h2>
+          <h2>Edit Tag name or list of words</h2>
           <button onClick={() => this.setState({ select: [] })}>Go Back</button>
           <List tag={this.state.select} handler={this.handler}></List>
         </div>
