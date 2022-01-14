@@ -1,6 +1,9 @@
 import "./App.css";
 import { Outlet, Link } from "react-router-dom";
 
+/**
+ * Function that contains menu and footer. This renders all sites in Outlet.
+ */
 function App() {
   return (
     <main

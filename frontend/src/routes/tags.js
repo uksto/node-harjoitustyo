@@ -3,8 +3,15 @@ import List from "../components/list";
 import React from "react";
 const axios = require("axios").default;
 
+/**
+ * Site that Shows user a list of tags to choose from
+ */
 class Tags extends React.Component {
   state = { tags: [], select: 0, swap: false };
+
+  /**
+   * get all tags
+   */
   async componentDidMount() {
     try {
       const response = await axios.get("/tags");
@@ -17,6 +24,9 @@ class Tags extends React.Component {
 
   render() {
     if (this.state.tags.length === 0) {
+      /**
+       * Render this if tags are not yet found
+       */
       return <p>loading...</p>;
     } else {
       if (this.state.select === 0) {
@@ -39,6 +49,9 @@ class Tags extends React.Component {
             </td>
           </tr>
         ));
+        /**
+         * Render List of tags if tag is not selected
+         */
         return (
           <div>
             <h2>Select what words you want to learn</h2>
@@ -48,6 +61,9 @@ class Tags extends React.Component {
           </div>
         );
       } else {
+        /**
+         * Render List of words if tag is selected
+         */
         return (
           <div>
             <h2>Translate given words and press Check answers</h2>

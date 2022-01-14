@@ -1,5 +1,8 @@
 import React from "react";
 
+/**
+ * Conponent that handles word pairs and checks
+ */
 class Word extends React.Component {
   constructor(props) {
     super(props);
@@ -10,6 +13,9 @@ class Word extends React.Component {
     };
   }
 
+  /**
+   * Handles checking for right answers
+   */
   componentDidUpdate() {
     if (this.props.check && this.state.output === "") {
       if (
@@ -26,7 +32,11 @@ class Word extends React.Component {
 
   render() {
     let ui;
+
     if (this.props.swap) {
+      /**
+       * Render this if word pairs are swapped
+       */
       ui = this.state.pair.map((word) => (
         <tr key={word.id}>
           <td key={word.finnish}>{word.finnish}</td>
@@ -40,6 +50,9 @@ class Word extends React.Component {
         </tr>
       ));
     } else {
+      /**
+       * Render this if word pairs are not swapped
+       */
       ui = this.state.pair.map((word) => (
         <tr key={word.id}>
           <td key={word.english}>{word.english}</td>

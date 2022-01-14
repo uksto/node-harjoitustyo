@@ -3,8 +3,15 @@ import List from "../components/admin-list";
 import React from "react";
 const axios = require("axios").default;
 
+/**
+ * Site that Shows admin a list of tags to edit
+ */
 class Admin extends React.Component {
   state = { tags: [], select: [], delete: 0, tagname: "" };
+
+  /**
+   * get all tags
+   */
   async componentDidMount() {
     try {
       const response = await axios.get("/tags");
@@ -16,6 +23,9 @@ class Admin extends React.Component {
     this.handler = this.handler.bind(this);
   }
 
+  /**
+   * function that handles adding new tag
+   */
   async handleNewTag() {
     try {
       const response = await axios.post("/tag", {
@@ -30,6 +40,9 @@ class Admin extends React.Component {
     }
   }
 
+  /**
+   * function that handles deleting tag
+   */
   async handleTagDelete(id) {
     try {
       await axios.delete("/tag/" + id);
@@ -44,6 +57,9 @@ class Admin extends React.Component {
     }
   }
 
+  /**
+   * function that handles setting a new tagname to state
+   */
   handler(id, tag) {
     let tmp = this.state.tags;
     let i = 0;
@@ -70,6 +86,9 @@ class Admin extends React.Component {
           </td>
         </tr>
       ));
+      /**
+       * Render this if a tag is not selected
+       */
       return (
         <div>
           <h2>Select what words you want to learn</h2>
@@ -95,6 +114,9 @@ class Admin extends React.Component {
         </div>
       );
     } else {
+      /**
+       * Render this if a tag is selected
+       */
       return (
         <div>
           <h2>Edit Tag names or list of words</h2>

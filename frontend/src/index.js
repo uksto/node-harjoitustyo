@@ -10,6 +10,10 @@ import Tags from "./routes/tags";
 import Admin from "./routes/admin";
 import Front from "./routes/front";
 const rootElement = document.getElementById("root");
+
+/**
+ * Function that sets up Router
+ */
 render(
   <BrowserRouter>
     <Routes>
@@ -18,19 +22,6 @@ render(
         <Route path="tags" element={<Tags />} />
         <Route path="admin" element={<Admin />} />
       </Route>
-      <Route
-        path="*"
-        element={
-          <main style={{ padding: "1rem" }}>
-            <img
-              src="/404.jpg"
-              alt="404 Site not found"
-              width="500"
-              height="600"
-            />
-          </main>
-        }
-      />
     </Routes>
   </BrowserRouter>,
   rootElement
