@@ -2,7 +2,8 @@
 
 This is my exercise work project for school course.<br />
 This project is "Learn English!" app.<br />
-App is currently running in Heroku https://node-harjoitus.herokuapp.com/.<br />
+~~App is currently running in Heroku https://node-harjoitus.herokuapp.com/.~~<br />
+Heroku is no longer free and I have not found alternative place to host.<br />
 
 ## Features
 
